@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE")
+        classpath("se.transmode.gradle:gradle-docker:1.2")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'spring-boot'
+apply plugin: 'docker'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'cd4ecs'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = 'orlade'
+version = '1.0'
+mainClassName = 'au.com.odecee.sync.devops.cd4ecs.Application'
+applicationName = 'sync-devops'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+distDocker {
+    exposePort 8080
+
+}
