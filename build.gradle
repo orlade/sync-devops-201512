@@ -21,6 +21,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-rest')
 }
 
+// Read in the application version from the application properties file.
+Properties props = new Properties()
+props.load(new FileInputStream("src/main/resources/application.properties"))
+version = props.version
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
